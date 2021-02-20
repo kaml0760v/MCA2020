@@ -1,0 +1,122 @@
+
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop
+$ git init PROJECT
+Initialized empty Git repository in C:/Users/exam209/Desktop/PROJECT/.git/
+====================================================================================
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop
+$ cd PROJECT
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ echo "This is README file" >> README.txt
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ echo "This is DEFINITION file" >> DEFINITION.txt
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ ls
+DEFINITION.txt  README.txt
+=================================================================================
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git add README.txt
+warning: LF will be replaced by CRLF in README.txt.
+The file will have its original line endings in your working directory
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git add DEFINITION.txt
+warning: LF will be replaced by CRLF in DEFINITION.txt.
+The file will have its original line endings in your working directory
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git commit -m "This is first commir"
+[master (root-commit) 1d7386d] This is first commir
+ 2 files changed, 2 insertions(+)
+ create mode 100644 DEFINITION.txt
+ create mode 100644 README.txt
+
+
+======================================================================================
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git log --oneline --decorate --graph --all
+* ed152cd (HEAD -> master) This is first commit
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git checkout -b DETAILS
+Switched to a new branch 'DETAILS'
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (DETAILS)
+$ echo "This is DETAILS branch file " >> CONTACTUS.txt
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (DETAILS)
+$ git add CONTACTUS.txt
+warning: LF will be replaced by CRLF in CONTACTUS.txt.
+The file will have its original line endings in your working directory
+
+$ git commit -m "This is second commit of DETAILS branch"
+[DETAILS 23aa6fe] This is second commit of DETAILS branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 CONTACTUS.txt
+
+$ git checkout master
+Switched to branch 'master'
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git merge DETAILS master
+Updating 1d7386d..23aa6fe
+Fast-forward
+ CONTACTUS.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 CONTACTUS.txt
+===================================================================================================
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git branch -d DETAILS
+Deleted branch DETAILS (was 1d29a6b)
+==============================================================================================================
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git checkout -b TECHNICALS
+Switched to a new branch 'TECHNICALS'
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (TECHNICALS)
+$ echo "This project on Android. we use Android studion for developing the Android application" >> TECHNICALSPECIFICATION.txt
+==================================================================================================================
+$ exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (TECHNICALS)
+$ git add TECHNICALSPECIFICATION.txt
+warning: LF will be replaced by CRLF in TECHNICALSPECIFICATION.txt.
+The file will have its original line endings in your working directory
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (TECHNICALS)
+$ git commit -m "This is commit of TECHNICALS branch"
+[TECHNICALS 1bb9beb] This is commit of TECHNICALS branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 TECHNICALSPECIFICATION.txt
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (TECHNICALS)
+$ git checkout master
+Switched to branch 'master'
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git merge TECHNICALS master
+Updating 23aa6fe..1bb9beb
+Fast-forward
+ TECHNICALSPECIFICATION.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 TECHNICALSPECIFICATION.txt
+==================================================================================================================
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git remote add origin https://github.com/Gptl9574/PrcaticalTest.git
+
+
+exam209@cs-w209 MINGW64 /c/Users/exam209/Desktop/PROJECT (master)
+$ git push origin master
+fatal: helper error (-1): authentication prompt was canceled
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (10/10), 967 bytes | 967.00 KiB/s, done.
+Total 10 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/Gptl9574/PrcaticalTest.git
+ * [new branch]      master -> master
+==========================================================================================
