@@ -1,0 +1,84 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site3.master.cs" Inherits="E_Learning_System.Site3" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+     <style>
+        #header {
+            color: #247BA0;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #nav {
+            background-color: #247BA0;
+            padding: 1px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li a {
+            color: #F1FAEE;
+            font-size: 15px;
+            column-width: 1%;
+        }
+
+        li {
+            display: inline;
+            padding-left: 2px;
+            column-width: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            margin-left: 20px
+        }
+
+        li a:hover {
+            background-color: #F3FFBD;
+            color: #FF1654;
+            padding: 1%;
+        }
+
+         #footer {
+             background-color: #C7EFCF;
+             text-align: center;
+             padding-bottom: 1%;
+             position: fixed;
+             left: 0;
+             bottom: 0;
+             width: 100%;
+             font-size: 20px;
+         }
+    </style>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header id="header">
+        <h1>E-Learning System</h1>
+    </header>
+    <nav id="nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="Webinar_Workshop.aspx">Webinars and Workshops</a></li>
+            <li><a href="Reports.aspx">Participation History</a></li>
+        </ul>
+    </nav>
+    <div id="con">
+        <form id="form1" runat="server">
+         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        </form>
+        
+    </div>
+    <footer id="footer">
+        copyright @Learning  
+    </footer>
+</body>
+</html>

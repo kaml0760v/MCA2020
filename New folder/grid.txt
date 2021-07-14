@@ -1,0 +1,125 @@
+create Procedure EmpEntry  
+(  
+  --variable  declareations   
+ @Action Varchar (10),    --to perform operation according to string ed to this varible such as Insert,update,delete,select        
+ @id int=null,    --id to perform specific task  
+ @Fname Varchar (50)=null,   -- for FirstName  
+ @MName Varchar (50)=null,   -- for MName  
+ @Lname Varchar (50)=null    -- for LastName  
+)  
+as  
+Begin   
+  SET NOCOUNT ON;  
+  
+If @Action='Insert'   --used to insert records  
+Begin  
+   Insert Into employee (FirstName,MName,LastName)values(@Fname,@MName,@Lname)  
+End    
+else if @Action='Select'   --used to Select records  
+Begin  
+    select *from employee  
+end  
+else if @Action='Update'  --used to update records  
+Begin  
+   update employeeset FirstName=@Fname,MName=@MName,LastName=@Lname where id=@id  
+ End  
+ Else If @Action='delete'  --used to delete records  
+ Begin  
+   delete from employeewhere id=@id  
+ end  
+End  
+
+
+<form id="form1"runat="server">  
+    <div>  
+First Name  <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>  
+Middle Name<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>  
+Last Name <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>  
+        <asp:Button ID="Button1"runat="server"Text="save" onclick="Button1_Click" />  
+    </div>  
+<asp:HiddenField ID="HiddenField1" runat="server"/>  
+ <asp:GridViewIDasp:GridViewID="GridView1" runat="server" DataKeyNames ="id" OnRowEditing ="Edit"                 
+        OnRowCancelingEdit ="canceledit"    OnRowDeleting ="delete"    OnRowUpdating = "Update" >  
+</asp:GridView>
+</form>  
+
+protected void empsave(object sender, EventArgs e)  
+{  
+      connection();  
+      query =  "studentEntryView";          //Stored Procedure name   
+      SqlCommand com = new SqlCommand(query, con);  //creating  SqlCommand  object  
+      com.CommandType = CommandType.StoredProcedure;  //here we declaring command type as stored Procedure  
+  
+       /* adding paramerters to  SqlCommand below *\  
+      com.Parameters.AddWithValue("@Action", HiddenField1.Value).ToString();//for ing hidden value to preform insert operation  
+       com.Parameters.AddWithValue("@FName",TextBox1.Text.ToString());        //first Name  
+       com.Parameters.AddWithValue("@Mname ", TextBox2.Text.ToString());     //middle Name  
+       com.Parameters.AddWithValue("@LName ",TextBox3.Text.ToString());       //Last Name  
+       com.ExecuteNonQuery();                     //executing the sqlcommand  
+       Label1.Visible = true;  
+       Label1.Text = "Records are Submitted Successfully";  
+}  
+
+public void viewdata()  
+{  
+    connection();  
+    query = "studentEntryView";  
+    SqlCommand com = new SqlCommand(query, con);  
+    com.CommandType = CommandType.StoredProcedure;  
+    com.Parameters.AddWithValue("@Action", HiddenField2.Value).ToString();  
+    DataSet ds =new DataSet();  
+    SqlDataAdapter da =  new SqlDataAdapter(com);  
+    da.Fill(ds);  
+    GridView1.DataSource = ds;  
+    GridView1.DataBind();  
+}  
+
+protected void edit(objectsender, GridViewEditEventArgs e)  
+{  
+    GridView1.EditIndex= e.NewEditIndex;  
+    gedata();  
+}  
+
+protected void  canceledit(object sender, GridViewCancelEditEventArgs e)  
+{  
+    GridView1.EditIndex = -1;  
+    gedata();  
+}  
+
+protected void delete(object sender, GridViewDeleteEventArgs e)  
+{  
+      connection();  
+      int id =  int.Parse(GridView1.DataKeys[e.RowIndex].Value.ToString());  
+      HiddenField1.Value = "Delete";  
+      query = "EmpEntry";  
+      com = new SqlCommand(query, con);  
+      com.CommandType =CommandType .StoredProcedure;  
+      com.Parameters.AddWithValue("@Action", HiddenField1.Value).ToString();  
+      com.Parameters.AddWithValue("id", SqlDbType.Int).Value = id;  
+      com.ExecuteNonQuery();  
+      con.Close();  
+      gedata();  
+} 
+
+protected void update(object sender, GridViewUpdateEventArgs e)  
+{  
+     connection();  
+     int id=int.Parse(GridView1.DataKeys[e.RowIndex].Value.ToString());  
+     HiddenField1.Value = "update";  
+     query = "EmpEntry";  
+     com = new SqlCommand(query, con);  
+     com.CommandType = CommandType.StoredProcedure;  
+     com.Parameters.AddWithValue("@Action", HiddenField1.Value).ToString();  
+     com.Parameters.AddWithValue("@FName", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text.ToString());  
+     com.Parameters.AddWithValue("@MName", ((TextBox)GridView1.Rows[e.RowIndex].Cells[4].Controls[0]).Text.ToString());  
+     com.Parameters.AddWithValue("@LName", ((TextBox)GridView1.Rows[e.RowIndex].Cells[5].Controls[0]).Text.ToString());  
+     com.Parameters.AddWithValue("@id", SqlDbType.int ).Value = id;  
+     com.ExecuteNonQuery();  
+     con.Close();  
+     GridView1.EditIndex = -1;  
+     gedata();  
+}  
+
+
+
+
